@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_print_ptr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amonier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 12:28:51 by amonier           #+#    #+#             */
-/*   Updated: 2022/11/21 16:31:11 by amonier          ###   ########.fr       */
+/*   Created: 2023/01/25 22:14:15 by amonier           #+#    #+#             */
+/*   Updated: 2023/01/25 22:53:11 by amonier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/libft.h"
+#include "../Includes/ft_printf.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+int	ft_putnbr_base_ptr(unsigned long long ptr, int *length)
 {
-	size_t	i;
-	char	*temp;
-
-	temp = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		if (temp[i] == (char)c)
-			return (&temp[i]);
-		i++;
-	}
-	return (NULL);
+	if (ptr >= 16)
+		ft_putnbr_base_ptr(ptr / 16, length);
+	ft_putchar(HEXA[ptr % 16]);
+	return (*length += 1);
 }
-/*
-int	main(void)
+
+int	ft_print_ptr(unsigned long long ptr)
 {
-	char 	s[] = "012345";
-	char	*rep = ft_memchr(s, 2 + 256, 3);
-	printf("%s\n%s", rep, s + 2);
-}*/
+	int	length;
+
+	if (ptr == 0)
+	{
+		length = ft_putstr("(nil)");
+		return (length);
+	}
+	length = ft_putstr("0x");
+	ft_putnbr_base_ptr(ptr, &length);
+	return (length);
+}
