@@ -16,7 +16,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <unistd.h>
+//# include <unistd.h>
+# include <io.h>
 
 # define HEXA "0123456789abcdef0123456789ABCDEF"
 # define BASE_10 "0123456789"

@@ -14,16 +14,18 @@
 # define LIBFT_H
 
 # include <stdio.h>
-# include <unistd.h>
+//# include <unistd.h>
+# include <io.h>
 # include <stddef.h>
 # include <stdlib.h>
 # include <stdint.h>
+# include <fcntl.h>
 
 # include "ft_printf.h"
 
 typedef struct s_list
 {
-	void			*content;
+	char			*content;
 	struct s_list	*next;
 }					t_list;
 
@@ -70,5 +72,20 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+	
+t_list	*ft_listnew(char *content, t_list *lst, int j);
+void	ft_listadd_back(t_list **lst, t_list *new, int i);
+int		ft_listiter(t_list *lst, int (*f)(char *, char, int));
+char	*get_next_line(int fd);
+char	*ft_fill_from_lst(t_list *lst);
+int		ft_check_sep(char *s, char c, int boolean);
+char	*ft_normi(char *kanye, char *buffer, t_list **lst, int *tab_fd_l);
+char	*length_diff_zero(char *buf, char *kanye, int length, t_list **lst);
+t_list	*get_next_line2(int fd);
+char	*ret_line_in_static2(char *kanye, t_list **lst);
 
 #endif
