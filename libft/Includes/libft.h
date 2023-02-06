@@ -23,11 +23,6 @@
 
 # include "ft_printf.h"
 
-typedef struct s_list
-{
-	char			*content;
-	struct s_list	*next;
-}					t_list;
 
 void	ft_bzero(void *s, size_t n);
 int		ft_isalnum(int c);
@@ -63,20 +58,37 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	**ft_split(char const *s, char c);
-t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-int		ft_lstsize(t_list *lst);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
-void	ft_lstclear(t_list **lst, void (*del)(void *));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+// ft_lst 
+typedef struct int_list
+{
+	int				content;
+	struct int_list	*next;
+}					i_list;
+
+i_list	*ft_lstnew(int content);
+void	ft_lstadd_front(i_list **lst, i_list *new);
+int		ft_lstsize(i_list *lst);
+i_list	*ft_lstlast(i_list *lst);
+void	ft_lstadd_back(i_list **lst, i_list *new);
+void	ft_lstdelone(i_list *lst, void (*del)(int));
+void	ft_lstclear(i_list **lst, void (*del)(int));
+void	ft_lstiter(i_list *lst, void (*f)(int));
+i_list	*ft_lstmap(i_list *lst, int (*f)(int), void (*del)(int));
+
+
+// ft_gnl
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-	
+
+typedef struct s_list
+{
+	char			*content;
+	struct s_list	*next;
+}					t_list;
+
 t_list	*ft_listnew(char *content, t_list *lst, int j);
 void	ft_listadd_back(t_list **lst, t_list *new, int i);
 int		ft_listiter(t_list *lst, int (*f)(char *, char, int));

@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/libft.h"
+#include "../Includes/libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+i_list	*ft_lstlast(i_list *lst)
 {
-	t_list	*temp;
+	i_list	*temp;
 
 	if (lst == NULL)
 		return (NULL);

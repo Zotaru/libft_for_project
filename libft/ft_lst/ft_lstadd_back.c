@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amonier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 18:00:43 by amonier           #+#    #+#             */
-/*   Updated: 2022/11/24 23:25:37 by amonier          ###   ########.fr       */
+/*   Created: 2022/11/22 18:59:15 by amonier           #+#    #+#             */
+/*   Updated: 2022/11/22 21:32:54 by amonier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/libft.h"
+#include "../Includes/libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+void	ft_lstadd_back(i_list **lst, i_list *new)
 {
-	t_list	*new_list;
-	t_list	*element;
+	i_list	*temp;
 
-	new_list = NULL;
-	while (lst)
+	if (lst)
 	{
-		element = ft_lstnew((*f)(lst->content));
-		if (element == NULL)
+		if (*lst)
 		{
-			ft_lstclear(&new_list, (*del));
-			return (NULL);
+			temp = ft_lstlast(*lst);
+			temp->next = new;
 		}
-		ft_lstadd_back(&new_list, element);
-		lst = lst->next;
+		else
+			*lst = new;
 	}
-	return (new_list);
 }
